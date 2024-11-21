@@ -12,4 +12,3 @@ distancia_percorrida = float(input('Digite a distância percorrida em Km: '))
 #Calculo Viagem:
 
 tempo_ptd_minutos = partida 
-int
