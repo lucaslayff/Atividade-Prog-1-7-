@@ -33,7 +33,28 @@ else:
 #Onde: vm é a velocidade média, ΔS é o deslocamento, Δt é o intervalo de tempo. 
 #Para converter a velocidade de km/h para m/s, basta dividir o valor por 3,6. 
 #dividir o espaço percorrido pelo tempo para ocorrer a movimentação.
+
 dist_seg = tempo_viagem - segundos_parados
 dist_hora = tempo_ptd_minutos / 3600
 vm_global = distancia_percorrida / (tempo_viagem / 3600)
 vm_em_movimento = distancia_percorrida / dist_hora
+
+dist_seg = tempo_viagem - segundos_parados
+dist_hora = tempo_ptd_minutos / 3600
+vm_global = distancia_percorrida / (tempo_viagem / 3600)
+vm_em_movimento = distancia_percorrida / dist_hora
+
+# Calculo do Custo de Gas:
+
+custo_viagem = preco_gas * litros_gas
+
+# O desempenho do carro (em Km/l, l/h e R$/Km):
+
+km_viag = distancia_percorrida / litros_gas
+l_por_hora = litros_gas / dist_hora
+dinheiro_gasto = (preco_gas * litros_gas) / distancia_percorrida
+
+print(f'O tmpeo total da Viagem foi de:  {tempo_viagem:.0f} segundos')
+print(f'A Velocidade Média Global é:  {vm_global:.2f} E a Velocidade Média em movimento foi de: {vm_em_movimento:.2f}')
+print(f'O custo de Gasolina foi de:  {custo_viagem:.1f}')
+print(f'O desempenho do carro foi de:  {km_viag:.2f}Km/Hr, {l_por_hora:.2f} L/Hr, {dinheiro_gasto:.2f} e total gasto em reais:')
