@@ -1,0 +1,9 @@
+    #Com base na nova legislação da Previdência Brasileira, regulamentada pela Lei
+#Complementar nº 1354/2020 e pela Emenda à Constituição nº 49/2020, desenvolva um programa em
+#Python que solicite as seguintes informações de uma pessoa:
+#• Sexo da pessoa (masculino/feminino).
+#• Data de nascimento da pessoa (no formato DD/MM/AAAA).
+#• Data de início da contribuição previdenciária da pessoa (no formato DD/MM/AAAA).
+
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
