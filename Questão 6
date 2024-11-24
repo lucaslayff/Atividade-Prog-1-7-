@@ -61,3 +61,19 @@ if hoje.month == data_nascimento.month:
 data_aposentadoria = datetime(ano_aposentadoria, data_nascimento.month, data_nascimento.day)
 
 #calculo aposentadoria pelo tempo de contribuição
+
+data_aposentadoria = hoje.year
+if tempo_contribuição < tempo_necessario_contribuição:
+   ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
+
+if hoje.month < data_inicio_contribuição.month:
+   ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
+
+if hoje.month == data_inicio_contribuição.month:
+   if hoje.day < data_inicio_contribuição.day:
+      ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
+    
+data_aposentadoria = datetime(ano_aposentadoria, data_inicio_contribuição.month, data_inicio_contribuição.day)
+#a linha acima vai criar uma nova data por tempo de consideração levando em conta o ano de aposentadoria e o mês e o dia inicio da contribuição.
+print(f'Aposentadoria por idade: {data_aposentadoria.strftime("%d/%m/%y")}')
+print(f'Aposentadoria por tempo de contribuição: {tempo_contribuição.strftime("%d/%m/%y")}')
