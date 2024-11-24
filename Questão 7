@@ -1,0 +1,53 @@
+#Desenvolva um código em Python que solicite ao usuário que informe os
+#comprimentos dos três lados de um triângulo. Em seguida, verifique se esses comprimentos podem
+#formar um triângulo. Caso afirmativo, calcule e informe os valores dos ângulos do triângulo e classifiqueo quanto aos lados e aos ângulos.
+#Peça ao usuário para inserir os comprimentos dos três lados do triângulo.
+#b) Verifique se os comprimentos fornecidos podem formar um triângulo. Caso contrário, informe
+#que não é possível formar um triângulo com esses lados.
+#c) Se for possível formar um triângulo, calcule os três ângulos do triângulo.
+#d) Classifique o triângulo quanto aos lados (equilátero, isósceles ou escaleno) e aos ângulos
+# (agudo, obtuso ou retângulo).
+#e) Exiba a classificação do triângulo quanto aos lados e aos ângulos.
+
+import math
+
+lado_a = float(input('Informe o cumprimento do ladio A: '))
+lado_b = float(input('Informe o cumprimento do ladio B: '))
+lado_c = float(input('Informe o cumprimento do ladio C: '))
+
+#verifique se os comprimentos fornecidos podem formar um triângulo. Caso contrário, informe
+#que não é possível formar um triângulo com esses lados.
+
+if lado_a + lado_b <= lado_c:
+    print('Os lados informados não podem formar um triangulo. ')
+
+elif lado_a + lado_c <= lado_b:
+    print('Os lados informados não podem formar um triangulo. ')
+
+elif lado_b + lado_c <= lado_a:
+     print('Os lados informados não podem formar um triangulo. ')
+
+else:
+    print('Os lados informados podem formar um triangulo! ')
+
+angulo_a = math.degrees(math.acos((lado_b ** 2 + lado_c ** 2 - lado_a ** 2) / (2 * lado_b * lado_c)))
+angulo_b = math.degrees(math.acos((lado_a ** 2 + lado_c ** 2 - lado_b ** 2) / (2 * lado_a * lado_c)))
+angulo_c = math.degrees(math.acos((lado_a ** 2 + lado_b ** 2 - lado_c ** 2) / (2 * lado_a * lado_b)))
+
+print(f'Os angulos do triangulo são: A {angulo_a}º, B{angulo_b:.2f}º e C{angulo_c:.2f}º')
+
+#Classifique o triângulo quanto aos lados (equilátero, isósceles ou escaleno) e aos ângulos (agudo, obtuso ou retângulo).
+#Eq: três lados iguais, Isó: dois lados iguais, Esca: todos lados diferentes.
+if lado_a == lado_b:
+    if lado_b == lado_c:
+        classificação = "Este angulo é um Equilátero."
+    
+    elif lado_a  == lado_b:
+        classificação = "Este angulo é um angulo Isósceles."
+    elif lado_b == lado_c:
+        classificação = "Este angulo é um angulo Isósceles."
+    elif lado_a == lado_c:
+        classificação = "Este angulo é um angulo Isósceles."
+else:
+    classificação = "Este angulo é um Escaleno."
+print(f'O triangulo se classifica como: {classificação}.')
