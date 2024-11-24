@@ -1,4 +1,4 @@
-    #Com base na nova legislação da Previdência Brasileira, regulamentada pela Lei
+#Com base na nova legislação da Previdência Brasileira, regulamentada pela Lei
 #Complementar nº 1354/2020 e pela Emenda à Constituição nº 49/2020, desenvolva um programa em
 #Python que solicite as seguintes informações de uma pessoa:
 #• Sexo da pessoa (masculino/feminino).
@@ -7,16 +7,15 @@
 
 from datetime import datetime
 
-sexo_pessoa = input('Qual o seu sexo? (Masculino/Feminino) ')
-data_nascimento = int(input('Digite sua data de nascimento (DD/MM/AAAA): '))
-data_inicio_contribuição = int(input('Digite a data de inicio de sua contribuição (DD/MM/AAAA): '))
-tempo_contribuição = int(input('Quanto tempo de contribuição você tem? (EM ANOS) '))
+sexo_pessoa = input('Qual o seu sexo? (Masculino/Feminino): ')
+data_nascimento = input('Digite sua data de nascimento (DD/MM/AAAA): ')
+data_inicio_contribuicao = input('Digite a data de início da contribuição (DD/MM/AAAA): ')
+tempo_contribuicao = int(input('Quanto tempo de contribuição você tem? (EM ANOS): '))
 
+data_nascimento = datetime.strptime(data_nascimento, "%d/%m/%Y")  # Converte a data de nascimento
+data_inicio_contribuicao = datetime.strptime(data_inicio_contribuicao, "%d/%m/%Y")  # Converte a data de início de contribuição
 
-data_nascimento = datetime.strptime (data_nascimento, "%d/%m/%y") #o strptime vai converter a data de nascimento no formato de dd/mm/aaaa, fazendo o calculo da idade e de outros dados.
-tempo_contribuição = datetime.strptime (tempo_contribuição, "%d/%m/%y")
-
-hoje  = datetime.today()
+hoje = datetime.today()
 idade = hoje.year - data_nascimento.year
 
 #O programa deve então calcular e exibir a data em que a pessoa poderá se aposentar, considerando as
@@ -34,46 +33,51 @@ if hoje.month < data_nascimento.month:
 
 if hoje.month == data_nascimento.month:
     if hoje.day < data_nascimento.day:
-     idade -= 1
+        idade -= 1
 
-     #agora é só calcular o tempo de contribuição
-if sexo_pessoa.lower() == "Masculino": #o "lower" serve para caso o usuario escreva "mAsCulino", ou: "masculino", o programa reconheça como "Masculino" e leia de qualquer forma
+         #agora é só calcular o tempo de contribuição
+
+if sexo_pessoa.lower() == "masculino": #o "lower" serve para caso o usuario escreva "mAsCulino", ou: "masculino", o programa reconheça como "Masculino" e leia de qualquer forma
     idade_necessaria = 65
-    tempo_necessario_contribuição = 35
+    tempo_necessario_contribuicao = 35
+
+elif sexo_pessoa.lower() == "feminino":
+    idade_necessaria = 62
+    tempo_necessario_contribuicao = 30
 
 else:
-    idade_necessaria = 62
-    tempo_necessario_contribuição = 30
+    print("Sexo inválido.")
+    exit()
 
-    #calcular a aposentadoria na idade necessária (caso não dê o periodo maximo/requerido de contribuição necessario)
+ #calcular a aposentadoria na idade necessária (caso não dê o periodo maximo/requerido de contribuição necessario)
 
-ano_aposentadoria = hoje.year
+ano_aposentadoria_idade = hoje.year
 if idade < idade_necessaria:
-   ano_aposentadoria = data_nascimento.year + idade_necessaria
+    ano_aposentadoria_idade = data_nascimento.year + idade_necessaria
 
 if hoje.month < data_nascimento.month:
-   ano_aposentadoria = data_nascimento.year + idade_necessaria
+    ano_aposentadoria_idade = data_nascimento.year + idade_necessaria
 
 if hoje.month == data_nascimento.month:
-   if hoje.day < data_nascimento.day:
-      ano_aposentadoria = data_nascimento.year + idade_necessaria
+    if hoje.day < data_nascimento.day:
+        ano_aposentadoria_idade = data_nascimento.year + idade_necessaria
 
-data_aposentadoria = datetime(ano_aposentadoria, data_nascimento.month, data_nascimento.day)
+data_aposentadoria_idade = datetime(ano_aposentadoria_idade, data_nascimento.month, data_nascimento.day)
 
 #calculo aposentadoria pelo tempo de contribuição
 
-data_aposentadoria = hoje.year
-if tempo_contribuição < tempo_necessario_contribuição:
-   ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
+ano_aposentadoria_contribuicao = hoje.year
+if tempo_contribuicao < tempo_necessario_contribuicao:
+    ano_aposentadoria_contribuicao = data_inicio_contribuicao.year + tempo_necessario_contribuicao
 
-if hoje.month < data_inicio_contribuição.month:
-   ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
+if hoje.month < data_inicio_contribuicao.month:
+    ano_aposentadoria_contribuicao = data_inicio_contribuicao.year + tempo_necessario_contribuicao
 
-if hoje.month == data_inicio_contribuição.month:
-   if hoje.day < data_inicio_contribuição.day:
-      ano_aposentadoria = data_inicio_contribuição.year + tempo_necessario_contribuição
-    
-data_aposentadoria = datetime(ano_aposentadoria, data_inicio_contribuição.month, data_inicio_contribuição.day)
+if hoje.month == data_inicio_contribuicao.month:
+    if hoje.day < data_inicio_contribuicao.day:
+        ano_aposentadoria_contribuicao = data_inicio_contribuicao.year + tempo_necessario_contribuicao
+
+data_aposentadoria_contribuicao = datetime(ano_aposentadoria_contribuicao, data_inicio_contribuicao.month, data_inicio_contribuicao.day)
 #a linha acima vai criar uma nova data por tempo de consideração levando em conta o ano de aposentadoria e o mês e o dia inicio da contribuição.
-print(f'Aposentadoria por idade: {data_aposentadoria.strftime("%d/%m/%y")}')
-print(f'Aposentadoria por tempo de contribuição: {tempo_contribuição.strftime("%d/%m/%y")}')
+print(f'Aposentadoria por idade: {data_aposentadoria_idade.strftime("%d/%m/%Y")}')
+print(f'Aposentadoria por tempo de contribuição: {data_aposentadoria_contribuicao.strftime("%d/%m/%Y")}')
