@@ -6,4 +6,10 @@
 #• Data de início da contribuição previdenciária da pessoa (no formato DD/MM/AAAA).
 
 from datetime import datetime
-from dateutil.relativedelta import relativedelta
+
+sexo_pessoa = input('Qual o seu sexo? (Masculino/Feminino) ')
+data_nascimento = int(input('Digite sua data de nascimento (DD/MM/AAAA): '))
+tempo_contribuição = int(input('Quanto tempo de contribuição você tem? '))
+
+data_nascimento = datetime.strptime (data_nascimento, "%d/%m/%y") #o strptime vai converter a data de nascimento no formato de dd/mm/aaaa, fazendo o calculo da idade e de outros dados.
+tempo_contribuição = datetime.strptime (tempo_contribuição, "%d/%m/%y")
